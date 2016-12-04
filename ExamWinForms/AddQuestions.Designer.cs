@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddQuestions));
             this.richTextBoxAddQuestions = new System.Windows.Forms.RichTextBox();
             this.richTexAddTruAnsw = new System.Windows.Forms.RichTextBox();
             this.richTextBoxAddAnsw1 = new System.Windows.Forms.RichTextBox();
@@ -38,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btcancel = new System.Windows.Forms.Button();
             this.btAddQ = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBoxAddQuestions
@@ -155,12 +157,23 @@
             this.btAddQ.UseVisualStyleBackColor = true;
             this.btAddQ.Click += new System.EventHandler(this.btAddQ_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(620, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Тест \"Танки\"";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AddQuestions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btcancel;
             this.ClientSize = new System.Drawing.Size(722, 455);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btAddQ);
             this.Controls.Add(this.btcancel);
             this.Controls.Add(this.label4);
@@ -171,6 +184,7 @@
             this.Controls.Add(this.richTextBoxAddAnsw1);
             this.Controls.Add(this.richTexAddTruAnsw);
             this.Controls.Add(this.richTextBoxAddQuestions);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddQuestions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавление вопроса";
@@ -191,5 +205,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btcancel;
         private System.Windows.Forms.Button btAddQ;
+        private System.Windows.Forms.Button button1;
     }
 }

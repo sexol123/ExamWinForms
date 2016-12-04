@@ -21,8 +21,23 @@ namespace ExamWinForms
         {
            lresults = listresults;
            InitializeComponent();
-           dataGridViewResults.DataSource = lresults;
+           dataGridViewResults.DataSource = /*lresults*/listresults;
+            richTextBox1.Text += ToString();
         }
+
+
+        public override string ToString()
+        {
+            dataGridViewResults.DataSource = lresults;
+            string b = "";
+            foreach (var c in lresults)
+            {
+                b += "Имя: "+c.username +" Результат: "+ c.result 
+                    + "\nПопытки: " + c.trying + " Дата: " + c.date + "\nВерно отвеченые: " + c.answeredQ + "\n*\n";
+            }
+            return b;
+        }
+
         private void resultBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
@@ -98,16 +113,15 @@ namespace ExamWinForms
                     {
                         if (reader.Name == "Result")
                         {
-                            Result res  = new Result();
-                            {
-                                res.username = reader.GetAttribute("Name");
-                                res.result = Convert.ToUInt16(reader.GetAttribute("Result"));
-                                res.trying = Convert.ToUInt16(reader.GetAttribute("Trying"));
-                                res.answeredQ = reader.GetAttribute("Tru");
-                                res.date = reader.GetAttribute("Date");
-                            }
-                            
-                            lresults.Add(res);
+                            lresults.Add(new Result
+                            { 
+                                username = reader.GetAttribute("Name"),
+                                result = Convert.ToUInt16(reader.GetAttribute("Result")),
+                                trying = Convert.ToUInt16(reader.GetAttribute("Trying")),
+                                answeredQ = reader.GetAttribute("Tru"),
+                                date = reader.GetAttribute("Date")
+                           });
+                          
 
                         }
                     }

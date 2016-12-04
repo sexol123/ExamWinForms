@@ -7,3 +7,4 @@ C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\bin\Debug\TestingLibrary.dll
 C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\bin\Debug\TestingLibrary.pdb
 C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.dll
 C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.pdb
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.csprojResolveAssemblyReference.cache

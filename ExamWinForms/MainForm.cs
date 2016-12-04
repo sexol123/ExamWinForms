@@ -18,7 +18,7 @@ namespace ExamWinForms
         private bool start = false;
         public string FileName;
         public int numq = 0;
-        const int valtime = 10;
+        const byte valtime = 20;
         string answeredQ { get; set; }
         private FormUsername nameDLG = new FormUsername();
         private ResultsWindow resDLG;
@@ -33,20 +33,6 @@ namespace ExamWinForms
 
             set { listquestions = value; }
         }
-
-        public ResultsWindow ResDLG
-        {
-            get
-            {
-                return resDLG;
-            }
-
-            set
-            {
-                resDLG = value;
-            }
-        }
-
         public BindingList<Result> Listresults = new BindingList<Result>();
       
         public MainForm()
@@ -54,7 +40,7 @@ namespace ExamWinForms
             
             InitializeComponent();
             Trying = 1;
-            resDLG = new ResultsWindow(Listresults);
+            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,11 +66,11 @@ namespace ExamWinForms
             {
                 return;
             }
-
             FileName = dlg.FileName;
             XmlTextReader reader = null;
             try
             {
+                Listquestions.Clear();
                 reader = new XmlTextReader(FileName);
                 reader.WhitespaceHandling = WhitespaceHandling.None;
                 while (reader.Read())
@@ -100,9 +86,8 @@ namespace ExamWinForms
                                 a1 = reader.GetAttribute("Answer1"),
                                 a2 = reader.GetAttribute("Answer2"),
                                 alta = reader.GetAttribute("AltAnswer")
-                            };
+                            };                       
                             Listquestions.Add(question);
-
                         }
                     }
                 }
@@ -119,15 +104,20 @@ namespace ExamWinForms
                     reader.Close();
                 button2.Enabled = true;
             }
-            // labeltime.Text = $"Время: {time} сек";
-
-           
         }
 
         private void Initials()
         {
             try
             {
+                if (Listquestions.Count <= 0)
+                {
+                    MessageBox.Show("Загрузите вопросы");
+                    btRestart.Enabled = false;
+                    return;
+                }
+                numq = 0;
+                TruAnswers = 0;
                 richTextBoxQ.Text = Listquestions[numq].question;
                 MixAnswers();
                 label2.Text = $" {numq + 1} из {Listquestions.Count} ";
@@ -150,7 +140,7 @@ namespace ExamWinForms
             saveFileDialog1.DefaultExt = "xml";
             saveFileDialog1.OverwritePrompt = true;
             FileName = null;
-            saveFileDialog1.FileName = FileName ?? "QuestinsList";
+            saveFileDialog1.FileName = FileName ?? "QuestinsList"+DateTime.Today;
             if (saveFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
             FileName = Path.GetFullPath(saveFileDialog1.FileName);
@@ -159,7 +149,6 @@ namespace ExamWinForms
             {
                 writer = new XmlTextWriter(FileName, Encoding.Unicode);
                 writer.WriteStartDocument();
-
                 writer.WriteStartElement("QuestionsList");
                 foreach (Question question in Listquestions)
                 {
@@ -186,17 +175,6 @@ namespace ExamWinForms
                     writer.Close();
             }
         }
-
-        //private void тестToolStripMenuItem1_Click(object sender, EventArgs e)
-        //{
-
-        //    Listquestions.Add(new Question("Ты вася?", "Я это Я", "Да", "Нет"));
-        //    richTextBoxQ.Text = Listquestions[0].question;
-        //    richTextBoxA1.Text = Listquestions[0].tru;
-        //    richTextBoxA2.Text = Listquestions[0].a1;
-        //    richTextBoxA3.Text = Listquestions[0].a2;
-        //}
-
         private void richTextBoxA2_TextChanged(object sender, EventArgs e)
         {
 
@@ -235,7 +213,9 @@ namespace ExamWinForms
             nameDLG.ShowDialog();
             if (DialogResult.OK == nameDLG.DialogResult)
             {
+                btRestart.Enabled = true;    
                 labelName.Text = Data.username;
+               
                 Initials();
                 button2.Enabled = false;
             }
@@ -261,11 +241,6 @@ namespace ExamWinForms
             }
 
                 
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void radioButton1_Click(object sender, EventArgs e)
@@ -335,7 +310,7 @@ namespace ExamWinForms
                     time = valtime;
                     numq++;
                 }
-                if (numq >= Listquestions.Count)
+                if (numq == Listquestions.Count)
                 {
                     timer1.Stop();
                     labeltime.BackColor = DefaultBackColor;
@@ -343,8 +318,19 @@ namespace ExamWinForms
                     MessageBox.Show($"Вопросы закончились.\nРезультат: {TruAnswers} из {Listquestions.Count}\nПопыток: {Trying}",
                         $"Результат: {TruAnswers} из {Listquestions.Count}  Попыток: {Trying}",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    try
+                    {
+                        Listresults.Add(new Result(Data.username, TruAnswers, Trying, DateTime.Now.ToString(), answeredQ));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Результат не добавился(((\n"+ex.Message, "пипец");
+                    }
+                    
+                    btRestart.Enabled = false;
+                    answeredQ = "";
+                    numq = 0;                      
                     button2.Enabled = true;
-                    Listresults.Add(new Result(Data.username, TruAnswers, Trying, DateTime.Now.ToString(),answeredQ));
                     richTextBoxQ.Clear();
                     richTextBoxA1.Clear();
                     label2.Text = "";
@@ -377,25 +363,18 @@ namespace ExamWinForms
             }
         }
 
-        private void свойToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var res = new AddQuestions(Listquestions).ShowDialog();
-            if (DialogResult.Cancel == res)
-                return;
-            button3.Enabled = true;
-        }
-
-        private void button1Start_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             var res = MessageBox.Show("Начать сначала?", "Хотите сделать новую попытку?", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
             if (DialogResult.No == res)
-                return;         
+            {
+                timer1.Start();
+                return;
+            }                
+            time = valtime;
+            labeltime.Text = $"Время: {time} сек";
             TruAnswers = 0;
             numq = 0;
             button2.Enabled = true;
@@ -416,6 +395,10 @@ namespace ExamWinForms
                 richTextBoxA2.Clear();
                 richTextBoxA3.Clear();
                 button3.Enabled = false;
+                timer1.Stop();
+                time = valtime;
+                labeltime.BackColor = DefaultBackColor;
+                labeltime.Text = $"Время: {time} сек";
             }
             catch (Exception ex)
             {
@@ -435,8 +418,8 @@ namespace ExamWinForms
 
         private void результатыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ResDLG.ShowDialog();
-           
+            resDLG = new ResultsWindow(Listresults);
+            resDLG.ShowDialog();          
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -449,6 +432,14 @@ namespace ExamWinForms
             var d = MessageBox.Show("Выйти?","Выход", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult.Yes == d )
                     Application.Exit();
+        }
+
+        private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var res = new AddQuestions(Listquestions).ShowDialog();
+            if (DialogResult.Cancel == res)
+                return;
+            button3.Enabled = true;
         }
     }
 }

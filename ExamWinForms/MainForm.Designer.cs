@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -40,8 +41,8 @@
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьПамятьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьВопросToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.свойToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.результатыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.richTextBoxQ = new System.Windows.Forms.RichTextBox();
             this.richTextBoxA1 = new System.Windows.Forms.RichTextBox();
@@ -53,7 +54,6 @@
             this.btRestart = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -179,20 +179,19 @@
             this.очиститьПамятьToolStripMenuItem.Text = "Очистить память";
             this.очиститьПамятьToolStripMenuItem.Click += new System.EventHandler(this.очиститьПамятьToolStripMenuItem_Click);
             // 
+            // выходToolStripMenuItem
+            // 
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.выходToolStripMenuItem.Text = "Выход";
+            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
+            // 
             // добавитьВопросToolStripMenuItem
             // 
-            this.добавитьВопросToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.свойToolStripMenuItem});
             this.добавитьВопросToolStripMenuItem.Name = "добавитьВопросToolStripMenuItem";
             this.добавитьВопросToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
             this.добавитьВопросToolStripMenuItem.Text = "Добавить вопрос";
-            // 
-            // свойToolStripMenuItem
-            // 
-            this.свойToolStripMenuItem.Name = "свойToolStripMenuItem";
-            this.свойToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.свойToolStripMenuItem.Text = "Свой";
-            this.свойToolStripMenuItem.Click += new System.EventHandler(this.свойToolStripMenuItem_Click);
+            this.добавитьВопросToolStripMenuItem.Click += new System.EventHandler(this.добавитьВопросToolStripMenuItem_Click);
             // 
             // результатыToolStripMenuItem
             // 
@@ -296,6 +295,7 @@
             this.btRestart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btRestart.BackColor = System.Drawing.Color.LightCyan;
+            this.btRestart.Enabled = false;
             this.btRestart.Location = new System.Drawing.Point(250, 30);
             this.btRestart.Name = "btRestart";
             this.btRestart.Size = new System.Drawing.Size(78, 23);
@@ -307,27 +307,21 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(107, 37);
+            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelName.Location = new System.Drawing.Point(105, 29);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(0, 13);
+            this.labelName.Size = new System.Drawing.Size(0, 24);
             this.labelName.TabIndex = 20;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 37);
+            this.label3.Location = new System.Drawing.Point(24, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 21;
             this.label3.Text = "Пользователь: ";
             this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // выходToolStripMenuItem
-            // 
-            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.выходToolStripMenuItem.Text = "Выход";
-            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -351,6 +345,7 @@
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -375,7 +370,6 @@
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem добавитьВопросToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem свойToolStripMenuItem;
         private System.Windows.Forms.RichTextBox richTextBoxQ;
         private System.Windows.Forms.RichTextBox richTextBoxA1;
         private System.Windows.Forms.RichTextBox richTextBoxA2;
