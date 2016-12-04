@@ -1,0 +1,9 @@
+c:\users\student\documents\visual studio 2015\Projects\ExamWinForms\TestingLibrary\bin\Debug\TestingLibrary.dll
+c:\users\student\documents\visual studio 2015\Projects\ExamWinForms\TestingLibrary\bin\Debug\TestingLibrary.pdb
+c:\users\student\documents\visual studio 2015\Projects\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.csprojResolveAssemblyReference.cache
+c:\users\student\documents\visual studio 2015\Projects\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.dll
+c:\users\student\documents\visual studio 2015\Projects\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.pdb
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\bin\Debug\TestingLibrary.dll
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\bin\Debug\TestingLibrary.pdb
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.dll
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Debug\TestingLibrary.pdb
