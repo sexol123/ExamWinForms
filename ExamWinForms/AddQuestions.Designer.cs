@@ -142,8 +142,9 @@
             this.btcancel.Name = "btcancel";
             this.btcancel.Size = new System.Drawing.Size(75, 23);
             this.btcancel.TabIndex = 8;
-            this.btcancel.Text = "Отмена";
+            this.btcancel.Text = "Закрыть";
             this.btcancel.UseVisualStyleBackColor = true;
+            this.btcancel.Click += new System.EventHandler(this.btcancel_Click);
             // 
             // btAddQ
             // 

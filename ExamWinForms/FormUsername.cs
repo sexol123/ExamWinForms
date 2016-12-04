@@ -12,9 +12,8 @@ using System.Windows.Forms;
 namespace ExamWinForms
 {
     public partial class FormUsername : Form
-    {
-        
-        private string s;
+    {      
+        //private string s;
         public FormUsername()
         {
            

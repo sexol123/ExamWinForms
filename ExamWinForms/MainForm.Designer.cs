@@ -63,12 +63,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton1.AutoSize = true;
             this.radioButton1.BackColor = System.Drawing.Color.Azure;
+            this.radioButton1.Enabled = false;
             this.radioButton1.Location = new System.Drawing.Point(27, 230);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(31, 17);
             this.radioButton1.TabIndex = 5;
             this.radioButton1.Text = "1";
             this.radioButton1.UseVisualStyleBackColor = false;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             this.radioButton1.Click += new System.EventHandler(this.radioButton1_Click);
             // 
             // radioButton2
@@ -77,13 +79,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton2.AutoSize = true;
             this.radioButton2.BackColor = System.Drawing.Color.Azure;
+            this.radioButton2.Enabled = false;
             this.radioButton2.Location = new System.Drawing.Point(27, 296);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(31, 17);
             this.radioButton2.TabIndex = 6;
             this.radioButton2.Text = "2";
             this.radioButton2.UseVisualStyleBackColor = false;
-            this.radioButton2.Click += new System.EventHandler(this.radioButton2_Click);
+            this.radioButton2.Click += new System.EventHandler(this.radioButton2_Click_1);
             // 
             // radioButton3
             // 
@@ -91,14 +94,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.radioButton3.AutoSize = true;
             this.radioButton3.BackColor = System.Drawing.Color.Azure;
+            this.radioButton3.Enabled = false;
             this.radioButton3.Location = new System.Drawing.Point(27, 371);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(31, 17);
             this.radioButton3.TabIndex = 7;
             this.radioButton3.Text = "3";
             this.radioButton3.UseVisualStyleBackColor = false;
-            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged_1);
-            this.radioButton3.Click += new System.EventHandler(this.radioButton2_Click);
+            this.radioButton3.Click += new System.EventHandler(this.radioButton3_Click);
             // 
             // label1
             // 
@@ -224,6 +227,7 @@
             this.richTextBoxA1.BackColor = System.Drawing.Color.Azure;
             this.richTextBoxA1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxA1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.richTextBoxA1.Enabled = false;
             this.richTextBoxA1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBoxA1.Location = new System.Drawing.Point(57, 202);
             this.richTextBoxA1.Name = "richTextBoxA1";
@@ -231,7 +235,9 @@
             this.richTextBoxA1.Size = new System.Drawing.Size(570, 65);
             this.richTextBoxA1.TabIndex = 14;
             this.richTextBoxA1.Text = "";
+            this.richTextBoxA1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxA1_MouseClick);
             this.richTextBoxA1.TextChanged += new System.EventHandler(this.richTextBoxA1_TextChanged);
+            this.richTextBoxA1.MouseLeave += new System.EventHandler(this.richTextBoxA1_MouseLeave);
             // 
             // richTextBoxA2
             // 
@@ -240,6 +246,7 @@
             this.richTextBoxA2.BackColor = System.Drawing.Color.Azure;
             this.richTextBoxA2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxA2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.richTextBoxA2.Enabled = false;
             this.richTextBoxA2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBoxA2.Location = new System.Drawing.Point(57, 273);
             this.richTextBoxA2.Name = "richTextBoxA2";
@@ -247,6 +254,7 @@
             this.richTextBoxA2.Size = new System.Drawing.Size(570, 65);
             this.richTextBoxA2.TabIndex = 15;
             this.richTextBoxA2.Text = "";
+            this.richTextBoxA2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxA2_MouseClick);
             this.richTextBoxA2.TextChanged += new System.EventHandler(this.richTextBoxA2_TextChanged);
             // 
             // richTextBoxA3
@@ -256,6 +264,7 @@
             this.richTextBoxA3.BackColor = System.Drawing.Color.Azure;
             this.richTextBoxA3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxA3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.richTextBoxA3.Enabled = false;
             this.richTextBoxA3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBoxA3.Location = new System.Drawing.Point(57, 344);
             this.richTextBoxA3.Name = "richTextBoxA3";
@@ -263,6 +272,7 @@
             this.richTextBoxA3.Size = new System.Drawing.Size(570, 65);
             this.richTextBoxA3.TabIndex = 16;
             this.richTextBoxA3.Text = "";
+            this.richTextBoxA3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxA3_MouseClick);
             this.richTextBoxA3.TextChanged += new System.EventHandler(this.richTextBoxA3_TextChanged);
             // 
             // labeltime

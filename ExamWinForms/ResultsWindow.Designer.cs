@@ -37,17 +37,18 @@
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewResults = new System.Windows.Forms.DataGridView();
-            this.resultBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.resultDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.answeredQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tryingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.resultBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mainFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.programBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.resultDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tryingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.answeredQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resultBindingSource)).BeginInit();
@@ -109,8 +110,9 @@
             this.dataGridViewResults.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.usernameDataGridViewTextBoxColumn,
             this.resultDataGridViewTextBoxColumn,
-            this.answeredQ,
             this.tryingDataGridViewTextBoxColumn,
+            this.Column1,
+            this.answeredQ,
             this.dateDataGridViewTextBoxColumn});
             this.dataGridViewResults.DataSource = this.resultBindingSource;
             this.dataGridViewResults.GridColor = System.Drawing.SystemColors.ControlLightLight;
@@ -126,11 +128,6 @@
             this.dataGridViewResults.Size = new System.Drawing.Size(649, 413);
             this.dataGridViewResults.TabIndex = 1;
             // 
-            // resultBindingSource
-            // 
-            this.resultBindingSource.DataSource = typeof(TestingLibrary.Result);
-            this.resultBindingSource.CurrentChanged += new System.EventHandler(this.resultBindingSource_CurrentChanged);
-            // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -140,45 +137,6 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Закрыть";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // usernameDataGridViewTextBoxColumn
-            // 
-            this.usernameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.usernameDataGridViewTextBoxColumn.DataPropertyName = "username";
-            this.usernameDataGridViewTextBoxColumn.HeaderText = "Имя";
-            this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
-            this.usernameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // resultDataGridViewTextBoxColumn
-            // 
-            this.resultDataGridViewTextBoxColumn.DataPropertyName = "result";
-            this.resultDataGridViewTextBoxColumn.HeaderText = "Результат";
-            this.resultDataGridViewTextBoxColumn.Name = "resultDataGridViewTextBoxColumn";
-            this.resultDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // answeredQ
-            // 
-            this.answeredQ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.answeredQ.DataPropertyName = "answeredQ";
-            this.answeredQ.HeaderText = "Отвеченые правильно";
-            this.answeredQ.Name = "answeredQ";
-            this.answeredQ.ReadOnly = true;
-            this.answeredQ.ToolTipText = "номера вопросов на который был дан верный ответ";
-            // 
-            // tryingDataGridViewTextBoxColumn
-            // 
-            this.tryingDataGridViewTextBoxColumn.DataPropertyName = "trying";
-            this.tryingDataGridViewTextBoxColumn.HeaderText = "Попытки";
-            this.tryingDataGridViewTextBoxColumn.Name = "tryingDataGridViewTextBoxColumn";
-            this.tryingDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Дата";
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // richTextBox1
             // 
@@ -200,6 +158,11 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "txt";
             // 
+            // resultBindingSource
+            // 
+            this.resultBindingSource.DataSource = typeof(TestingLibrary.Result);
+            this.resultBindingSource.CurrentChanged += new System.EventHandler(this.resultBindingSource_CurrentChanged);
+            // 
             // mainFormBindingSource
             // 
             this.mainFormBindingSource.DataSource = typeof(ExamWinForms.MainForm);
@@ -207,6 +170,55 @@
             // programBindingSource
             // 
             this.programBindingSource.DataSource = typeof(ExamWinForms.Program);
+            // 
+            // usernameDataGridViewTextBoxColumn
+            // 
+            this.usernameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.usernameDataGridViewTextBoxColumn.DataPropertyName = "username";
+            this.usernameDataGridViewTextBoxColumn.HeaderText = "Имя";
+            this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
+            this.usernameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // resultDataGridViewTextBoxColumn
+            // 
+            this.resultDataGridViewTextBoxColumn.DataPropertyName = "result";
+            this.resultDataGridViewTextBoxColumn.HeaderText = "Результат";
+            this.resultDataGridViewTextBoxColumn.Name = "resultDataGridViewTextBoxColumn";
+            this.resultDataGridViewTextBoxColumn.ReadOnly = true;
+            this.resultDataGridViewTextBoxColumn.Width = 62;
+            // 
+            // tryingDataGridViewTextBoxColumn
+            // 
+            this.tryingDataGridViewTextBoxColumn.DataPropertyName = "trying";
+            this.tryingDataGridViewTextBoxColumn.HeaderText = "Попытки";
+            this.tryingDataGridViewTextBoxColumn.Name = "tryingDataGridViewTextBoxColumn";
+            this.tryingDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tryingDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "sumQuestions";
+            this.Column1.HeaderText = "Всего вопросов";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 56;
+            // 
+            // answeredQ
+            // 
+            this.answeredQ.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.answeredQ.DataPropertyName = "answeredQ";
+            this.answeredQ.HeaderText = "Отвеченые правильно";
+            this.answeredQ.Name = "answeredQ";
+            this.answeredQ.ReadOnly = true;
+            this.answeredQ.ToolTipText = "номера вопросов на который был дан верный ответ";
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Дата";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // ResultsWindow
             // 
@@ -244,12 +256,13 @@
         private System.Windows.Forms.BindingSource mainFormBindingSource;
         private System.Windows.Forms.BindingSource programBindingSource;
         private System.Windows.Forms.ToolStripMenuItem очиститьToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn resultDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn answeredQ;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tryingDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn resultDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tryingDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn answeredQ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
     }
 }

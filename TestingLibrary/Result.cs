@@ -13,15 +13,17 @@ namespace TestingLibrary
         public ushort trying { get; set; }
         public string date { get; set; }
         public string answeredQ { get; set; }
+        public ushort sumQuestions { get; set; }
         public Result() { }
 
-        public Result(string username, ushort result, ushort trying, string date,string answered)
+        public Result(string username, ushort result, ushort trying, string date,string answered,ushort sumQ)
         {
             this.username = username;
             this.result = result;
             this.trying = trying;
             this.date = date;
             answeredQ = answered;
+            sumQuestions = sumQ;
         }
     }
 }

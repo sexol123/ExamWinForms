@@ -15,7 +15,6 @@ namespace ExamWinForms
 {
     public partial class MainForm : Form
     {
-        private bool start = false;
         public string FileName;
         public int numq = 0;
         const byte valtime = 20;
@@ -34,7 +33,8 @@ namespace ExamWinForms
             set { listquestions = value; }
         }
         public BindingList<Result> Listresults = new BindingList<Result>();
-      
+        bool truchecker { get; set; }
+
         public MainForm()
         {
             
@@ -43,17 +43,7 @@ namespace ExamWinForms
             
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void загрузитьФаилВопросовToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
@@ -112,10 +102,11 @@ namespace ExamWinForms
             {
                 if (Listquestions.Count <= 0)
                 {
-                    MessageBox.Show("Загрузите вопросы");
+                    MessageBox.Show(Data.username+", загрузите вопросы");
                     btRestart.Enabled = false;
                     return;
                 }
+                truchecker = EnabledAnsw(true);
                 numq = 0;
                 TruAnswers = 0;
                 richTextBoxQ.Text = Listquestions[numq].question;
@@ -127,7 +118,7 @@ namespace ExamWinForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Нет списка вопросов");
+                MessageBox.Show("Нет списка вопросов\n"+ex);
             }
         }
 
@@ -213,6 +204,7 @@ namespace ExamWinForms
             nameDLG.ShowDialog();
             if (DialogResult.OK == nameDLG.DialogResult)
             {
+               
                 btRestart.Enabled = true;    
                 labelName.Text = Data.username;
                
@@ -245,7 +237,7 @@ namespace ExamWinForms
 
         private void radioButton1_Click(object sender, EventArgs e)
         {
-          
+            richTextBoxA1_MouseClick(null, null);
         }
 
         public void MixAnswers()
@@ -282,11 +274,11 @@ namespace ExamWinForms
             {              
                 return richTextBoxA1.Text == tru;
             }
-            else if (radioButton2.Checked)
+            if (radioButton2.Checked)
             {
                 return richTextBoxA2.Text == tru;
             }
-            else if (radioButton3.Checked)
+            if (radioButton3.Checked)
             {               
                 return richTextBoxA3.Text == tru;
             }
@@ -309,6 +301,11 @@ namespace ExamWinForms
                         
                     time = valtime;
                     numq++;
+                    richTextBoxA1.BackColor = Color.Azure;
+                    richTextBoxA2.BackColor = Color.Azure;
+                    richTextBoxA3.BackColor = Color.Azure;
+                    EnabledAnsw(true);                                                   
+                
                 }
                 if (numq == Listquestions.Count)
                 {
@@ -318,15 +315,16 @@ namespace ExamWinForms
                     MessageBox.Show($"Вопросы закончились.\nРезультат: {TruAnswers} из {Listquestions.Count}\nПопыток: {Trying}",
                         $"Результат: {TruAnswers} из {Listquestions.Count}  Попыток: {Trying}",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    EnabledAnsw(false);
                     try
                     {
-                        Listresults.Add(new Result(Data.username, TruAnswers, Trying, DateTime.Now.ToString(), answeredQ));
+                        Listresults.Add(new Result(Data.username, TruAnswers, Trying, DateTime.Now.ToString(), answeredQ,(ushort)Listquestions.Count));
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Результат не добавился(((\n"+ex.Message, "пипец");
                     }
-                    
+                   
                     btRestart.Enabled = false;
                     answeredQ = "";
                     numq = 0;                      
@@ -355,13 +353,28 @@ namespace ExamWinForms
             }
         }
 
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        bool EnabledAnsw(bool ch)
         {
-            if (radioButton1.Checked || radioButton2.Checked || radioButton3.Checked)
+            if (ch)
             {
+                richTextBoxA1.Enabled = true;
+                richTextBoxA2.Enabled = true;
+                richTextBoxA3.Enabled = true;
+                radioButton1.Enabled = true;
+                radioButton2.Enabled = true;
                 radioButton3.Enabled = true;
+                return true;
             }
+            richTextBoxA1.Enabled = false;
+            richTextBoxA2.Enabled = false;
+            richTextBoxA3.Enabled = false;
+            radioButton1.Enabled = false;
+            radioButton2.Enabled = false;
+            radioButton3.Enabled = false;
+            return false;
         }
+
+     
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -388,6 +401,7 @@ namespace ExamWinForms
         {
             try
             {
+                truchecker = EnabledAnsw(false);
                 Listquestions.Clear();
                 richTextBoxQ.Clear();
                 richTextBoxA1.Clear();
@@ -406,15 +420,6 @@ namespace ExamWinForms
             }
         }
 
-        private void radioButton3_CheckedChanged_1(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void radioButton2_Click(object sender, EventArgs e)
-        {
-        
-        }
 
         private void результатыToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -436,10 +441,59 @@ namespace ExamWinForms
 
         private void добавитьВопросToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var res = new AddQuestions(Listquestions).ShowDialog();
-            if (DialogResult.Cancel == res)
-                return;
+            new AddQuestions(Listquestions).Show();           
             button3.Enabled = true;
+        }
+
+        private void richTextBoxA1_MouseClick(object sender, MouseEventArgs e)
+        {
+            radioButton1.Checked = true;
+            if (radioButton1.Checked && truchecker)
+            {
+                richTextBoxA1.BackColor =  Color.Chartreuse;
+                richTextBoxA2.BackColor = Color.Azure;
+                richTextBoxA3.BackColor = Color.Azure;
+            }
+            
+        }
+
+        private void richTextBoxA2_MouseClick(object sender, MouseEventArgs e)
+        {
+           
+            radioButton2.Checked = true;
+            if (radioButton2.Checked && truchecker)
+                richTextBoxA2.BackColor = Color.Chartreuse;
+            richTextBoxA1.BackColor = Color.Azure;
+            richTextBoxA3.BackColor = Color.Azure;
+        }
+
+        private void richTextBoxA3_MouseClick(object sender, MouseEventArgs e)
+        {
+            radioButton3.Checked = true;
+            if (radioButton3.Checked && truchecker)
+                richTextBoxA3.BackColor = Color.Chartreuse;
+            richTextBoxA1.BackColor = Color.Azure;
+            richTextBoxA2.BackColor = Color.Azure;
+        }
+
+        private void richTextBoxA1_MouseLeave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void radioButton2_Click_1(object sender, EventArgs e)
+        {
+            richTextBoxA2_MouseClick(null, null);
+        }
+
+        private void radioButton3_Click(object sender, EventArgs e)
+        {
+            richTextBoxA3_MouseClick(null, null);
         }
     }
 }

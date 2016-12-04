@@ -20,12 +20,29 @@ namespace ExamWinForms
             InitializeComponent();
         }
 
+        //public AddQuestions()
+        //{
+        //}
+
+        bool iftyping()
+        {
+            if (string.IsNullOrWhiteSpace(richTextBoxAddQuestions.Text)|| string.IsNullOrWhiteSpace(richTexAddTruAnsw.Text)
+                || string.IsNullOrWhiteSpace(richTextBoxAddAnsw1.Text)|| string.IsNullOrWhiteSpace(richTextBoxAddAnsw2.Text))
+            {
+                //richTextBoxAddQuestions.BackColor = Color.Chocolate;
+                MessageBox.Show("Заполните все поля", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+           
+            return true;
+        }
         private void btAddQ_Click(object sender, EventArgs e)
         {
-            
-            list.Add(new Question(richTextBoxAddQuestions.Text,richTexAddTruAnsw.Text,
+            if (iftyping())
+            {
+                 list.Add(new Question(richTextBoxAddQuestions.Text,richTexAddTruAnsw.Text,
                 richTextBoxAddAnsw1.Text,richTextBoxAddAnsw2.Text));
-            
+            }         
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,6 +66,12 @@ namespace ExamWinForms
             list.Add(new Question("Первый советский танк ", "МС-1", "Т-28", "Т-26"));
             list.Add(new Question("M3/M5 «Стюарт»", "Легкий танк США", "Средний танк США", "Легкий танк СССР"));
             list.Add(new Question("Т-50 советский танк по класификации", "Легкий", "Средний", "Тяжелый"));
+            this.Close();
+        }
+
+        private void btcancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }
