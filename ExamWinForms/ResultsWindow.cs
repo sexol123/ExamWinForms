@@ -22,7 +22,7 @@ namespace ExamWinForms
            lresults = listresults;
            InitializeComponent();
            dataGridViewResults.DataSource = /*lresults*/listresults;
-            richTextBox1.Text += ToString();
+            //richTextBox1.Text += ToString();
         }
 
 
@@ -51,10 +51,10 @@ namespace ExamWinForms
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Файли XML (*.xml)|*.xml";
+            saveFileDialog1.Filter = "Файлы ResultXML (*.ResultXML)|*.ResultXML|Файли XML (*.xml)|*.xml";
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.AddExtension = true;
-            saveFileDialog1.DefaultExt = "xml";
+            saveFileDialog1.DefaultExt = "ResultXML";
             saveFileDialog1.OverwritePrompt = true;            
             saveFileDialog1.FileName = FileName ?? "ResultsList";
             if (saveFileDialog1.ShowDialog() != DialogResult.OK)
@@ -75,6 +75,8 @@ namespace ExamWinForms
                     writer.WriteAttributeString("Trying", res.trying.ToString());
                     writer.WriteAttributeString("Tru", res.answeredQ);
                     writer.WriteAttributeString("Date", res.date);
+                    writer.WriteAttributeString("Testname",res.testname);
+                    writer.WriteAttributeString("Sumquestions",res.sumQuestions.ToString());
                     writer.WriteEndElement();
                 }
                 writer.WriteEndElement();
@@ -95,7 +97,7 @@ namespace ExamWinForms
         private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Фаилы XML (*.xml)|*.xml";
+            dlg.Filter = "Файлы ResultXML (*.ResultXML)|*.ResultXML|Файли XML (*.xml)|*.xml";
             if (dlg.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -119,7 +121,9 @@ namespace ExamWinForms
                                 result = Convert.ToUInt16(reader.GetAttribute("Result")),
                                 trying = Convert.ToUInt16(reader.GetAttribute("Trying")),
                                 answeredQ = reader.GetAttribute("Tru"),
-                                date = reader.GetAttribute("Date")
+                                date = reader.GetAttribute("Date"),
+                                testname = reader.GetAttribute("Testname"),
+                                sumQuestions = Convert.ToUInt16(reader.GetAttribute("Sumquestions"))
                            });
                           
 

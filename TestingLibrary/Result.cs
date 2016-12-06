@@ -14,6 +14,7 @@ namespace TestingLibrary
         public string date { get; set; }
         public string answeredQ { get; set; }
         public ushort sumQuestions { get; set; }
+        public string testname { get; set; }
         public Result() { }
 
         public Result(string username, ushort result, ushort trying, string date,string answered,ushort sumQ)
@@ -24,6 +25,17 @@ namespace TestingLibrary
             this.date = date;
             answeredQ = answered;
             sumQuestions = sumQ;
+            
+        }
+        public Result(string username, ushort result, ushort trying, string date,string answered,ushort sumQ,string testname)
+        {
+            this.username = username;
+            this.result = result;
+            this.trying = trying;
+            this.date = date;
+            answeredQ = answered;
+            sumQuestions = sumQ;
+            this.testname = testname;
         }
     }
 }

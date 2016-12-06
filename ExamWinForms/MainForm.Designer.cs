@@ -42,8 +42,19 @@
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.очиститьПамятьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьВопросToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.результатыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.встроеныеВопросыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отладочныйТестToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.тестТанкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.тестИдеотизмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьВопросToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menustriptimer = new System.Windows.Forms.ToolStripMenuItem();
+            this.время10СекундToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.время20СекундToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.время30СекундToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.время40СекундToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.время60СекундToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.richTextBoxQ = new System.Windows.Forms.RichTextBox();
             this.richTextBoxA1 = new System.Windows.Forms.RichTextBox();
             this.richTextBoxA2 = new System.Windows.Forms.RichTextBox();
@@ -54,6 +65,7 @@
             this.btRestart = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label_test_name = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,8 +154,11 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.тестToolStripMenuItem,
+            this.результатыToolStripMenuItem,
+            this.встроеныеВопросыToolStripMenuItem,
             this.добавитьВопросToolStripMenuItem,
-            this.результатыToolStripMenuItem});
+            this.menustriptimer,
+            this.оПрограммеToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(639, 24);
@@ -189,6 +204,44 @@
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
+            // результатыToolStripMenuItem
+            // 
+            this.результатыToolStripMenuItem.Name = "результатыToolStripMenuItem";
+            this.результатыToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.результатыToolStripMenuItem.Text = "Результаты";
+            this.результатыToolStripMenuItem.Click += new System.EventHandler(this.результатыToolStripMenuItem_Click);
+            // 
+            // встроеныеВопросыToolStripMenuItem
+            // 
+            this.встроеныеВопросыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.отладочныйТестToolStripMenuItem,
+            this.тестТанкиToolStripMenuItem,
+            this.тестИдеотизмToolStripMenuItem});
+            this.встроеныеВопросыToolStripMenuItem.Name = "встроеныеВопросыToolStripMenuItem";
+            this.встроеныеВопросыToolStripMenuItem.Size = new System.Drawing.Size(113, 20);
+            this.встроеныеВопросыToolStripMenuItem.Text = "Встроеные тесты";
+            // 
+            // отладочныйТестToolStripMenuItem
+            // 
+            this.отладочныйТестToolStripMenuItem.Name = "отладочныйТестToolStripMenuItem";
+            this.отладочныйТестToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.отладочныйТестToolStripMenuItem.Text = "Отладочный тест";
+            this.отладочныйТестToolStripMenuItem.Click += new System.EventHandler(this.отладочныйТестToolStripMenuItem_Click);
+            // 
+            // тестТанкиToolStripMenuItem
+            // 
+            this.тестТанкиToolStripMenuItem.Name = "тестТанкиToolStripMenuItem";
+            this.тестТанкиToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.тестТанкиToolStripMenuItem.Text = "Тест \"Танки\"";
+            this.тестТанкиToolStripMenuItem.Click += new System.EventHandler(this.тестТанкиToolStripMenuItem_Click);
+            // 
+            // тестИдеотизмToolStripMenuItem
+            // 
+            this.тестИдеотизмToolStripMenuItem.Name = "тестИдеотизмToolStripMenuItem";
+            this.тестИдеотизмToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.тестИдеотизмToolStripMenuItem.Text = "Тест \"Быстрый\"";
+            this.тестИдеотизмToolStripMenuItem.Click += new System.EventHandler(this.тестИдеотизмToolStripMenuItem_Click);
+            // 
             // добавитьВопросToolStripMenuItem
             // 
             this.добавитьВопросToolStripMenuItem.Name = "добавитьВопросToolStripMenuItem";
@@ -196,12 +249,60 @@
             this.добавитьВопросToolStripMenuItem.Text = "Добавить вопрос";
             this.добавитьВопросToolStripMenuItem.Click += new System.EventHandler(this.добавитьВопросToolStripMenuItem_Click);
             // 
-            // результатыToolStripMenuItem
+            // menustriptimer
             // 
-            this.результатыToolStripMenuItem.Name = "результатыToolStripMenuItem";
-            this.результатыToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
-            this.результатыToolStripMenuItem.Text = "Результаты";
-            this.результатыToolStripMenuItem.Click += new System.EventHandler(this.результатыToolStripMenuItem_Click);
+            this.menustriptimer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.время10СекундToolStripMenuItem,
+            this.время20СекундToolStripMenuItem,
+            this.время30СекундToolStripMenuItem,
+            this.время40СекундToolStripMenuItem,
+            this.время60СекундToolStripMenuItem});
+            this.menustriptimer.Name = "menustriptimer";
+            this.menustriptimer.Size = new System.Drawing.Size(61, 20);
+            this.menustriptimer.Text = "Таймер";
+            this.menustriptimer.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
+            // 
+            // время10СекундToolStripMenuItem
+            // 
+            this.время10СекундToolStripMenuItem.Name = "время10СекундToolStripMenuItem";
+            this.время10СекундToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.время10СекундToolStripMenuItem.Text = "Время 10 секунд";
+            this.время10СекундToolStripMenuItem.Click += new System.EventHandler(this.время10СекундToolStripMenuItem_Click);
+            // 
+            // время20СекундToolStripMenuItem
+            // 
+            this.время20СекундToolStripMenuItem.Name = "время20СекундToolStripMenuItem";
+            this.время20СекундToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.время20СекундToolStripMenuItem.Text = "Время 20 секунд";
+            this.время20СекундToolStripMenuItem.Click += new System.EventHandler(this.время20СекундToolStripMenuItem_Click);
+            // 
+            // время30СекундToolStripMenuItem
+            // 
+            this.время30СекундToolStripMenuItem.Name = "время30СекундToolStripMenuItem";
+            this.время30СекундToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.время30СекундToolStripMenuItem.Text = "Время 30 секунд";
+            this.время30СекундToolStripMenuItem.Click += new System.EventHandler(this.время30СекундToolStripMenuItem_Click);
+            // 
+            // время40СекундToolStripMenuItem
+            // 
+            this.время40СекундToolStripMenuItem.Name = "время40СекундToolStripMenuItem";
+            this.время40СекундToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.время40СекундToolStripMenuItem.Text = "Время 40 секунд";
+            this.время40СекундToolStripMenuItem.Click += new System.EventHandler(this.время40СекундToolStripMenuItem_Click);
+            // 
+            // время60СекундToolStripMenuItem
+            // 
+            this.время60СекундToolStripMenuItem.Name = "время60СекундToolStripMenuItem";
+            this.время60СекундToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.время60СекундToolStripMenuItem.Text = "Время 60 секунд";
+            this.время60СекундToolStripMenuItem.Click += new System.EventHandler(this.время60СекундToolStripMenuItem_Click);
+            // 
+            // оПрограммеToolStripMenuItem1
+            // 
+            this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(94, 20);
+            this.оПрограммеToolStripMenuItem1.Text = "О программе";
+            this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
             // 
             // richTextBoxQ
             // 
@@ -212,10 +313,10 @@
             this.richTextBoxQ.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxQ.Cursor = System.Windows.Forms.Cursors.Hand;
             this.richTextBoxQ.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBoxQ.Location = new System.Drawing.Point(27, 59);
+            this.richTextBoxQ.Location = new System.Drawing.Point(21, 59);
             this.richTextBoxQ.Name = "richTextBoxQ";
             this.richTextBoxQ.ReadOnly = true;
-            this.richTextBoxQ.Size = new System.Drawing.Size(600, 137);
+            this.richTextBoxQ.Size = new System.Drawing.Size(606, 137);
             this.richTextBoxQ.TabIndex = 13;
             this.richTextBoxQ.Text = "";
             this.richTextBoxQ.TextChanged += new System.EventHandler(this.richTextBoxQ_TextChanged);
@@ -229,10 +330,10 @@
             this.richTextBoxA1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.richTextBoxA1.Enabled = false;
             this.richTextBoxA1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBoxA1.Location = new System.Drawing.Point(57, 202);
+            this.richTextBoxA1.Location = new System.Drawing.Point(51, 202);
             this.richTextBoxA1.Name = "richTextBoxA1";
             this.richTextBoxA1.ReadOnly = true;
-            this.richTextBoxA1.Size = new System.Drawing.Size(570, 65);
+            this.richTextBoxA1.Size = new System.Drawing.Size(576, 65);
             this.richTextBoxA1.TabIndex = 14;
             this.richTextBoxA1.Text = "";
             this.richTextBoxA1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxA1_MouseClick);
@@ -248,10 +349,10 @@
             this.richTextBoxA2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.richTextBoxA2.Enabled = false;
             this.richTextBoxA2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBoxA2.Location = new System.Drawing.Point(57, 273);
+            this.richTextBoxA2.Location = new System.Drawing.Point(51, 273);
             this.richTextBoxA2.Name = "richTextBoxA2";
             this.richTextBoxA2.ReadOnly = true;
-            this.richTextBoxA2.Size = new System.Drawing.Size(570, 65);
+            this.richTextBoxA2.Size = new System.Drawing.Size(576, 65);
             this.richTextBoxA2.TabIndex = 15;
             this.richTextBoxA2.Text = "";
             this.richTextBoxA2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxA2_MouseClick);
@@ -266,10 +367,10 @@
             this.richTextBoxA3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.richTextBoxA3.Enabled = false;
             this.richTextBoxA3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBoxA3.Location = new System.Drawing.Point(57, 344);
+            this.richTextBoxA3.Location = new System.Drawing.Point(51, 344);
             this.richTextBoxA3.Name = "richTextBoxA3";
             this.richTextBoxA3.ReadOnly = true;
-            this.richTextBoxA3.Size = new System.Drawing.Size(570, 65);
+            this.richTextBoxA3.Size = new System.Drawing.Size(576, 65);
             this.richTextBoxA3.TabIndex = 16;
             this.richTextBoxA3.Text = "";
             this.richTextBoxA3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxA3_MouseClick);
@@ -319,19 +420,30 @@
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelName.Location = new System.Drawing.Point(105, 29);
+            this.labelName.MaximumSize = new System.Drawing.Size(130, 20);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(0, 24);
+            this.labelName.Size = new System.Drawing.Size(0, 20);
             this.labelName.TabIndex = 20;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 34);
+            this.label3.Location = new System.Drawing.Point(18, 33);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 21;
             this.label3.Text = "Пользователь: ";
             this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label_test_name
+            // 
+            this.label_test_name.AutoSize = true;
+            this.label_test_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_test_name.Location = new System.Drawing.Point(18, 425);
+            this.label_test_name.Name = "label_test_name";
+            this.label_test_name.Size = new System.Drawing.Size(72, 17);
+            this.label_test_name.TabIndex = 22;
+            this.label_test_name.Text = "Название";
             // 
             // MainForm
             // 
@@ -339,6 +451,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(639, 458);
+            this.Controls.Add(this.label_test_name);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.btRestart);
@@ -393,6 +506,18 @@
         private System.Windows.Forms.ToolStripMenuItem результатыToolStripMenuItem;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menustriptimer;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem встроеныеВопросыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem тестТанкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem отладочныйТестToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem время20СекундToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem время30СекундToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem время40СекундToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem время60СекундToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem время10СекундToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem тестИдеотизмToolStripMenuItem;
+        private System.Windows.Forms.Label label_test_name;
     }
 }
 

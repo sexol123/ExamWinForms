@@ -100,6 +100,7 @@
     <None Include="Properties\DataSources\FormUsername.datasource" />
     <None Include="Properties\DataSources\MainForm.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
+    <None Include="Properties\DataSources\setting.datasource" />
     <None Include="Properties\DataSources\TestingLibrary.Question.datasource" />
     <None Include="Properties\DataSources\TestingLibrary.Result.datasource" />
     <None Include="Properties\Settings.settings">

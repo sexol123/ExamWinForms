@@ -6,10 +6,11 @@ using System.Windows.Forms;
 
 namespace ExamWinForms
 {
-    static class Data
+   public static class Data
     {
         public static string username { get; set; }
-
+        public static byte valtime = 20;
+        public static string test_name { get; set; }
     }
     static class Program
     {

@@ -17,11 +17,11 @@ namespace ExamWinForms
     {
         public string FileName;
         public int numq = 0;
-        const byte valtime = 20;
+       
         string answeredQ { get; set; }
         private FormUsername nameDLG = new FormUsername();
         private ResultsWindow resDLG;
-        private byte time = valtime;
+        static byte time = Data.valtime;
         private List<Question> listquestions = new List<Question>();
         private readonly Random mix = new Random();
         private ushort TruAnswers = 0;
@@ -36,11 +36,10 @@ namespace ExamWinForms
         bool truchecker { get; set; }
 
         public MainForm()
-        {
-            
+        {            
             InitializeComponent();
             Trying = 1;
-            
+            labeltime.Text = $"Время: {Data.valtime} сек";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,7 +50,7 @@ namespace ExamWinForms
         private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Filter = "Фаилы XML (*.xml)|*.xml";
+            dlg.Filter = "Файлы QestXML (*.QestXML)|*.QestXML|Файли XML (*.xml)|*.xml";
             if (dlg.ShowDialog() != DialogResult.OK)
             {
                 return;
@@ -67,6 +66,10 @@ namespace ExamWinForms
                 {
                     if (reader.NodeType == XmlNodeType.Element)
                     {
+                        if (reader.Name == "QuestionsList")
+                        {
+                            Data.test_name = reader.GetAttribute("Testname");
+                        }
                         if (reader.Name == "Question")
                         {
                             Question question = new Question
@@ -92,7 +95,11 @@ namespace ExamWinForms
             {
                 if (reader != null)
                     reader.Close();
+                MessageBox.Show($"Тест успешно добавлен\nВопросов в списке: {Listquestions.Count} ", "Тест загружен", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 button2.Enabled = true;
+                menustriptimer.Enabled =  true;
+                Trying = 1;
+                label_test_name.Text = Data.test_name;
             }
         }
 
@@ -106,6 +113,7 @@ namespace ExamWinForms
                     btRestart.Enabled = false;
                     return;
                 }
+                time = Data.valtime;
                 truchecker = EnabledAnsw(true);
                 numq = 0;
                 TruAnswers = 0;
@@ -114,6 +122,7 @@ namespace ExamWinForms
                 label2.Text = $" {numq + 1} из {Listquestions.Count} ";
                 button3.Enabled = true;
                 timer1.Start();
+
 
             }
             catch (Exception ex)
@@ -125,13 +134,13 @@ namespace ExamWinForms
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Файли XML (*.xml)|*.xml";
+            saveFileDialog1.Filter = "Файлы QestXML (*.QestXML)|*.QestXML|Файли XML (*.xml)|*.xml";
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.AddExtension = true;
-            saveFileDialog1.DefaultExt = "xml";
+            saveFileDialog1.DefaultExt = "QestXML";
             saveFileDialog1.OverwritePrompt = true;
             FileName = null;
-            saveFileDialog1.FileName = FileName ?? "QuestinsList"+DateTime.Today;
+            saveFileDialog1.FileName = FileName;
             if (saveFileDialog1.ShowDialog() != DialogResult.OK)
                 return;
             FileName = Path.GetFullPath(saveFileDialog1.FileName);
@@ -141,8 +150,9 @@ namespace ExamWinForms
                 writer = new XmlTextWriter(FileName, Encoding.Unicode);
                 writer.WriteStartDocument();
                 writer.WriteStartElement("QuestionsList");
+                writer.WriteAttributeString("Testname", Data.test_name);
                 foreach (Question question in Listquestions)
-                {
+                {                  
                     writer.WriteStartElement("Question");
                     writer.WriteAttributeString("question", question.question);
                     writer.WriteAttributeString("TruAnswer", question.tru);
@@ -170,22 +180,18 @@ namespace ExamWinForms
         {
 
         }
-
         private void richTextBoxQ_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void richTextBoxA3_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void richTextBoxA1_TextChanged(object sender, EventArgs e)
         {
 
         }
-
         private void button3_Click(object sender, EventArgs e)
         {
             if (Listquestions.Count == 0)
@@ -197,23 +203,22 @@ namespace ExamWinForms
                 || radioButton3.Checked)
                    Doing();
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
-
             nameDLG.ShowDialog();
             if (DialogResult.OK == nameDLG.DialogResult)
-            {
-               
-                btRestart.Enabled = true;    
-                labelName.Text = Data.username;
-               
+            {             
+                btRestart.Enabled = true;
+                if (labelName.Text != Data.username)
+                {
+                    Trying = 1;
+                    labelName.Text = Data.username; 
+                }                         
                 Initials();
                 button2.Enabled = false;
-            }
-            
+                menustriptimer.Enabled = false;
+            }           
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             labeltime.BackColor = DefaultBackColor;
@@ -222,7 +227,7 @@ namespace ExamWinForms
             {
                 timer1.Stop();
                 numq++;
-                time = valtime;
+                time = Data.valtime;
                 Doing();              
                 return;
             }
@@ -230,16 +235,12 @@ namespace ExamWinForms
             if (time < 8)
             {
                 labeltime.BackColor = time%2 == 0 ? Color.Crimson : Color.Chartreuse;              
-            }
-
-                
+            }              
         }
-
         private void radioButton1_Click(object sender, EventArgs e)
         {
             richTextBoxA1_MouseClick(null, null);
         }
-
         public void MixAnswers()
         {
             int sw = mix.Next(0, 4);
@@ -286,8 +287,7 @@ namespace ExamWinForms
         }
 
         private void Doing()
-        {
-            
+        {           
             timer1.Start();
             try
             {
@@ -297,15 +297,13 @@ namespace ExamWinForms
                     {
                         ++TruAnswers;
                         answeredQ += $"{numq+1}, ";
-                    }
-                        
-                    time = valtime;
+                    }                        
+                    time = Data.valtime;
                     numq++;
                     richTextBoxA1.BackColor = Color.Azure;
                     richTextBoxA2.BackColor = Color.Azure;
                     richTextBoxA3.BackColor = Color.Azure;
-                    EnabledAnsw(true);                                                   
-                
+                    EnabledAnsw(true);                                                                   
                 }
                 if (numq == Listquestions.Count)
                 {
@@ -315,16 +313,16 @@ namespace ExamWinForms
                     MessageBox.Show($"Вопросы закончились.\nРезультат: {TruAnswers} из {Listquestions.Count}\nПопыток: {Trying}",
                         $"Результат: {TruAnswers} из {Listquestions.Count}  Попыток: {Trying}",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    menustriptimer.Enabled = true;
                     EnabledAnsw(false);
                     try
                     {
-                        Listresults.Add(new Result(Data.username, TruAnswers, Trying, DateTime.Now.ToString(), answeredQ,(ushort)Listquestions.Count));
+                        Listresults.Add(new Result(Data.username, TruAnswers, Trying, DateTime.Now.ToString(), answeredQ,(ushort)Listquestions.Count,Data.test_name));
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Результат не добавился(((\n"+ex.Message, "пипец");
-                    }
-                   
+                    }                   
                     btRestart.Enabled = false;
                     answeredQ = "";
                     numq = 0;                      
@@ -373,9 +371,6 @@ namespace ExamWinForms
             radioButton3.Enabled = false;
             return false;
         }
-
-     
-
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -383,14 +378,15 @@ namespace ExamWinForms
                 MessageBoxIcon.Question);
             if (DialogResult.No == res)
             {
+     
                 timer1.Start();
                 return;
             }                
-            time = valtime;
-            labeltime.Text = $"Время: {time} сек";
+            time = Data.valtime;
+            labeltime.Text = $"Время: {time} сек";     
             TruAnswers = 0;
             numq = 0;
-            button2.Enabled = true;
+            button2.Enabled = false;
             Initials();
             Trying++;
             if (Listquestions.Count > 0)
@@ -410,9 +406,13 @@ namespace ExamWinForms
                 richTextBoxA3.Clear();
                 button3.Enabled = false;
                 timer1.Stop();
-                time = valtime;
+                time =Data.valtime;
                 labeltime.BackColor = DefaultBackColor;
                 labeltime.Text = $"Время: {time} сек";
+                Data.test_name = "";
+                label_test_name.Text = Data.test_name;
+                menustriptimer.Enabled = true;
+                Data.username = "";
             }
             catch (Exception ex)
             {
@@ -453,8 +453,7 @@ namespace ExamWinForms
                 richTextBoxA1.BackColor =  Color.Chartreuse;
                 richTextBoxA2.BackColor = Color.Azure;
                 richTextBoxA3.BackColor = Color.Azure;
-            }
-            
+            }           
         }
 
         private void richTextBoxA2_MouseClick(object sender, MouseEventArgs e)
@@ -494,6 +493,103 @@ namespace ExamWinForms
         private void radioButton3_Click(object sender, EventArgs e)
         {
             richTextBoxA3_MouseClick(null, null);
+        }
+
+        private void оПрограммеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("\"Тестировщик\"\nМалеев Сергей\n     2016 год", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void тестТанкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listquestions.Clear();
+            Listquestions.Add(new Question("Американский Танк Т-32 имеет классификацию?", "Тяжёлого танка", "Среднего танка", "Лёгкого танка"));
+            Listquestions.Add(new Question("На противотанковую самоходную артиллерийскую установку ИСУ-152, устанавливались орудия...", " 152 мм ", "152 мм и 155 мм ", "152 мм, 100 мм "));
+            Listquestions.Add(new Question("Какой танк считается символом Второй Мировой войны?", "Т-34 и его модификация Т-34-85", "Немецкий Тигр", "Американский М4 \"Шерман\""));
+            Listquestions.Add(new Question("Советский тяжелый танк раннего периода войны ,существовал до  и после появления Т-34", "КВ-1", "ИС", "Т-28"));
+            Listquestions.Add(new Question("Немецкий тяжелый танк, впервые сошел с конвеера фирмы «Хеншель» 1942 года", "PzKpfw VI Ausf. H1 «Tiger»", "КВ-1", "PzKpfw V «Panther»"));
+            Listquestions.Add(new Question("«Ягдпантера» (Jagdpanther) это ?", " Тяжёлая по массе немецкая самоходно-артиллерийская установка (САУ) класса истребителей танков времён Второй мировой войны.", "Немецкий средний танк периода Второй мировой войны. ", "Советский средний танк периода Второй мировой войны"));
+            Listquestions.Add(new Question("M4 «Шерман» (M4 Sherman) — основной [ выбрать пропущеное ] средний танк периода Второй мировой войны. ", "американский", "немецкий", "советский"));
+            Listquestions.Add(new Question("«Фердина́нд» (Ferdinand) — это ? ", "Немецкая тяжёлая самоходно-артиллерийская установка периода Второй мировой войны класса истребителей танков.", "Советская тяжёлая самоходно-артиллерийская установка периода Второй мировой войны класса истребителей танков.", "Американская тяжёлая самоходно-артиллерийская установка периода Второй мировой войны класса истребителей танков."));
+            Listquestions.Add(new Question("Отличительная особенность «Фердина́нд» (Ferdinand) ", "Гибридная (электродвигатели + бензогенераторы) установка", "4 пары гусениц", "Два основных орудия"));
+            Listquestions.Add(new Question("ИС-1 это ?", "Советский тяжёлый танк периода Второй мировой войны. ", "Немецкий тяжёлый танк периода Второй мировой войны. ", "Советский легкий танк периода Второй мировой войны. "));
+            Listquestions.Add(new Question("Аббревиатура танков серии ИС означает", "«Иосиф Сталин» ", "«Иосиф Кабзон» ", "Ничего не означает"));
+            Listquestions.Add(new Question("ИС-3 (Объект 703) — советский тяжёлый танк разработки периода Великой Отечественной войны участвовал в боях ", "Не участвовал в Великой Отечественной", "Участвовал начиная с битвы под Сталинградом", "Штурмовал Берлин"));
+            Listquestions.Add(new Question("ИС-3 (Объект 703) имеет особенност(и)ь ", "Щучий нос и гладкую каплевидную башню", "Щучий нос", "Гладкую каплевидную башню"));
+            Listquestions.Add(new Question("«Ягдтигр» (Jagdtiger) это ?", "Германская самоходная артиллерийская установка (САУ) периода Второй мировой войны, класса истребителей танков.", "Японская самоходная артиллерийская установка (САУ) периода Второй мировой войны, класса истребителей танков.", "Американская самоходная артиллерийская установка (САУ) периода Второй мировой войны, класса истребителей танков."));
+            Listquestions.Add(new Question("M46 (танк) Имел также название «Генерал Паттон» (англ. General Patton) в честь Джорджа Паттона", "Американский средний танк второй половины 1940-х годов. ", " Средний танк Японии второй половины 1940-х годов. ", " Средний танк Великобритании второй половины 1940-х годов. "));
+            Listquestions.Add(new Question("Первый советский танк ", "МС-1", "Т-28", "Т-26"));
+            Listquestions.Add(new Question("M3/M5 «Стюарт»", "Легкий танк США", "Средний танк США", "Легкий танк СССР"));
+            Listquestions.Add(new Question("Т-50 советский танк по класификации", "Легкий", "Средний", "Тяжелый"));
+            Data.test_name = "Танки";
+            label_test_name.Text = Data.test_name;
+            Trying = 1;
+            button2.Enabled = true;
+            MessageBox.Show($"Тест \"Танки\" успешно добавлен\nВопросов в списке: {Listquestions.Count} ", "Тест загружен", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void отладочныйТестToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listquestions.Clear();
+            Listquestions.Add(new Question("Да?", "Да", "Нет", "Незнаю"));
+            Listquestions.Add(new Question("Нет?", "Нет", "Да", "Незнаю"));
+            Listquestions.Add(new Question("Незнаю?", "Незнаю", "Да", "Нет"));
+            Data.test_name = "Отладочный";
+            label_test_name.Text = Data.test_name;
+            Trying = 1;
+            button2.Enabled = true;
+            MessageBox.Show($"Отладочный тест успешно добавлен\nВопросов в списке: {Listquestions.Count} ", "Тест загружен", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void время20СекундToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Data.valtime = 20;
+            labeltime.Text = $"Время: {Data.valtime} сек";
+        }
+
+        private void время30СекундToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Data.valtime = 30;
+            labeltime.Text = $"Время: {Data.valtime} сек";
+        }
+
+        private void время40СекундToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Data.valtime = 40;
+            labeltime.Text = $"Время: {Data.valtime} сек";
+        }
+
+        private void время60СекундToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Data.valtime = 60;
+            labeltime.Text = $"Время: {Data.valtime} сек";
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void время10СекундToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Data.valtime = 10;
+            labeltime.Text = $"Время: {Data.valtime} сек";
+        }
+
+        private void тестИдеотизмToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Listquestions.Clear();
+            Listquestions.Add(new Question("В некоторых месяцах 30 дней, в некоторых 31. В скольки месяцах в году 28 дней?", " Во всех месяцах", "В Феврале", "Нет таких"));
+            Listquestions.Add(new Question("Что можно видеть с закрытыми глазами?", "Сны", "Темноту", "Ничего"));
+            Listquestions.Add(new Question("Что в огне не горит и в воде не тонет??", "Лед", "Бумага", "Нет такого"));
+            Listquestions.Add(new Question("Из какой посуды нельзя ничего поесть?", "Из пустой", "Никакой", "Незнаю"));
+            Listquestions.Add(new Question("На какой вопрос нельзя ответить «нет»?", "Ты жив?", "Ты мертв", "Незнаю"));
+            Listquestions.Add(new Question("Сколько будет 2+2*2?", "Шесть", "Восемь", "12"));
+            Data.test_name = "Быстрый";
+            label_test_name.Text = Data.test_name;
+            button2.Enabled = true;
+            Trying = 1;
+            MessageBox.Show($"Быстрый тест успешно добавлен\nВопросов в списке: {Listquestions.Count} ", "Тест загружен", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

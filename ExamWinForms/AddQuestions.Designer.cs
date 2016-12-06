@@ -39,7 +39,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btcancel = new System.Windows.Forms.Button();
             this.btAddQ = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBoxAddQuestions
@@ -47,11 +46,12 @@
             this.richTextBoxAddQuestions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBoxAddQuestions.Location = new System.Drawing.Point(15, 34);
+            this.richTextBoxAddQuestions.Location = new System.Drawing.Point(15, 39);
             this.richTextBoxAddQuestions.Name = "richTextBoxAddQuestions";
-            this.richTextBoxAddQuestions.Size = new System.Drawing.Size(695, 119);
+            this.richTextBoxAddQuestions.Size = new System.Drawing.Size(695, 114);
             this.richTextBoxAddQuestions.TabIndex = 0;
             this.richTextBoxAddQuestions.Text = "";
+            this.richTextBoxAddQuestions.Click += new System.EventHandler(this.richTextBoxAddQuestions_Click);
             // 
             // richTexAddTruAnsw
             // 
@@ -63,6 +63,7 @@
             this.richTexAddTruAnsw.Size = new System.Drawing.Size(695, 68);
             this.richTexAddTruAnsw.TabIndex = 1;
             this.richTexAddTruAnsw.Text = "";
+            this.richTexAddTruAnsw.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTexAddTruAnsw_MouseClick);
             // 
             // richTextBoxAddAnsw1
             // 
@@ -74,6 +75,7 @@
             this.richTextBoxAddAnsw1.Size = new System.Drawing.Size(695, 58);
             this.richTextBoxAddAnsw1.TabIndex = 2;
             this.richTextBoxAddAnsw1.Text = "";
+            this.richTextBoxAddAnsw1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBoxAddAnsw1_MouseClick);
             // 
             // richTextBoxAddAnsw2
             // 
@@ -85,6 +87,7 @@
             this.richTextBoxAddAnsw2.Size = new System.Drawing.Size(695, 57);
             this.richTextBoxAddAnsw2.TabIndex = 3;
             this.richTextBoxAddAnsw2.Text = "";
+            this.richTextBoxAddAnsw2.Enter += new System.EventHandler(this.richTextBoxAddAnsw2_Enter);
             // 
             // label1
             // 
@@ -92,7 +95,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 18);
+            this.label1.Location = new System.Drawing.Point(21, 23);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 4;
@@ -158,23 +161,12 @@
             this.btAddQ.UseVisualStyleBackColor = true;
             this.btAddQ.Click += new System.EventHandler(this.btAddQ_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(620, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Тест \"Танки\"";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // AddQuestions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btcancel;
             this.ClientSize = new System.Drawing.Size(722, 455);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btAddQ);
             this.Controls.Add(this.btcancel);
             this.Controls.Add(this.label4);
@@ -206,6 +198,5 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btcancel;
         private System.Windows.Forms.Button btAddQ;
-        private System.Windows.Forms.Button button1;
     }
 }
