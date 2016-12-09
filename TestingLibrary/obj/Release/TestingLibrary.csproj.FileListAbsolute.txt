@@ -1,0 +1,5 @@
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\bin\Release\TestingLibrary.dll
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\bin\Release\TestingLibrary.pdb
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Release\TestingLibrary.csprojResolveAssemblyReference.cache
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Release\TestingLibrary.dll
+C:\Users\sexol\Desktop\ExamWinForms\TestingLibrary\obj\Release\TestingLibrary.pdb

@@ -40,10 +40,6 @@ namespace ExamWinForms
             InitializeComponent();
             Trying = 1;
             labeltime.Text = $"Время: {Data.valtime} сек";
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -99,6 +95,8 @@ namespace ExamWinForms
                 button2.Enabled = true;
                 menustriptimer.Enabled =  true;
                 Trying = 1;
+                progressBar1.Value = numq + 1;
+
                 label_test_name.Text = Data.test_name;
             }
         }
@@ -113,6 +111,9 @@ namespace ExamWinForms
                     btRestart.Enabled = false;
                     return;
                 }
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = Listquestions.Count;
+               // progressBar1.Value = numq;
                 time = Data.valtime;
                 truchecker = EnabledAnsw(true);
                 numq = 0;
@@ -199,9 +200,12 @@ namespace ExamWinForms
                 MessageBox.Show("Нет списка вопросов");
                 return;
             }
+            progressBar1.Value = numq+1;
             if (radioButton1.Checked || radioButton2.Checked 
                 || radioButton3.Checked)
                    Doing();
+            
+
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -217,7 +221,9 @@ namespace ExamWinForms
                 Initials();
                 button2.Enabled = false;
                 menustriptimer.Enabled = false;
-            }           
+                progressBar1.Value = numq + 1;
+
+            }
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -391,6 +397,8 @@ namespace ExamWinForms
             Trying++;
             if (Listquestions.Count > 0)
                 button3.Enabled = true;
+            progressBar1.Value = numq + 1;
+
         }
 
         private void очиститьПамятьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -524,6 +532,7 @@ namespace ExamWinForms
             Data.test_name = "Танки";
             label_test_name.Text = Data.test_name;
             Trying = 1;
+            progressBar1.Value = numq + 1;
             button2.Enabled = true;
             MessageBox.Show($"Тест \"Танки\" успешно добавлен\nВопросов в списке: {Listquestions.Count} ", "Тест загружен", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -535,6 +544,7 @@ namespace ExamWinForms
             Listquestions.Add(new Question("Нет?", "Нет", "Да", "Незнаю"));
             Listquestions.Add(new Question("Незнаю?", "Незнаю", "Да", "Нет"));
             Data.test_name = "Отладочный";
+            progressBar1.Value = numq + 1;
             label_test_name.Text = Data.test_name;
             Trying = 1;
             button2.Enabled = true;
@@ -589,7 +599,37 @@ namespace ExamWinForms
             label_test_name.Text = Data.test_name;
             button2.Enabled = true;
             Trying = 1;
+
+            progressBar1.Value = numq + 1;
+
             MessageBox.Show($"Быстрый тест успешно добавлен\nВопросов в списке: {Listquestions.Count} ", "Тест загружен", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //if (e.KeyChar == (int)Keys.D1)
+            //{
+            //    radioButton1_Click(null, null);
+            //}
+            //else if(e.KeyChar == (int)Keys.D2)
+            //{
+            //    radioButton2_Click_1(null, null);
+            //}
+            //else if (e.KeyChar == (int)Keys.D3)
+            //{
+            //    radioButton3_Click(null, null);
+            //}
+        }
+
+        private void button3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void MainForm_Layout(object sender, LayoutEventArgs e)
+        {
+
+        }
+
     }
 }

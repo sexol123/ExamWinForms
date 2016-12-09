@@ -1,0 +1,14 @@
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\bin\Release\ExamWinForms.exe.config
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\bin\Release\ExamWinForms.exe
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\bin\Release\ExamWinForms.pdb
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\bin\Release\TestingLibrary.dll
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\bin\Release\TestingLibrary.pdb
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.csprojResolveAssemblyReference.cache
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.AddQuestions.resources
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.MainForm.resources
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.FormUsername.resources
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.Properties.Resources.resources
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.ResultsWindow.resources
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.csproj.GenerateResource.Cache
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.exe
+C:\Users\sexol\Desktop\ExamWinForms\ExamWinForms\obj\Release\ExamWinForms.pdb

@@ -66,6 +66,7 @@
             this.labelName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label_test_name = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,6 +150,7 @@
             this.button3.Text = "Следующий вопрос";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.button3_KeyPress);
             // 
             // menuStrip1
             // 
@@ -437,6 +439,7 @@
             // 
             // label_test_name
             // 
+            this.label_test_name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label_test_name.AutoSize = true;
             this.label_test_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label_test_name.Location = new System.Drawing.Point(18, 425);
@@ -445,12 +448,24 @@
             this.label_test_name.TabIndex = 22;
             this.label_test_name.Text = "Название";
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBar1.ForeColor = System.Drawing.Color.Gold;
+            this.progressBar1.Location = new System.Drawing.Point(21, 190);
+            this.progressBar1.MarqueeAnimationSpeed = 50;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(606, 13);
+            this.progressBar1.TabIndex = 23;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PaleTurquoise;
             this.ClientSize = new System.Drawing.Size(639, 458);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label_test_name);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelName);
@@ -473,7 +488,8 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Тестировщик";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainForm_KeyPress);
+            this.Layout += new System.Windows.Forms.LayoutEventHandler(this.MainForm_Layout);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -518,6 +534,7 @@
         private System.Windows.Forms.ToolStripMenuItem время10СекундToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem тестИдеотизмToolStripMenuItem;
         private System.Windows.Forms.Label label_test_name;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }
 

@@ -90,6 +90,7 @@
             this.Name = "FormUsername";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Имя пользователя";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormUsername_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

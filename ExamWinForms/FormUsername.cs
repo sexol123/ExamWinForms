@@ -45,6 +45,16 @@ namespace ExamWinForms
         private void textBoxUsername_KeyPress(object sender, KeyPressEventArgs e)
         {
             textBoxUsername.BackColor = Color.FloralWhite;
+            if (e.KeyChar == (int) Keys.Enter)
+                btOK_Click(null, null);
+        }
+
+
+
+        private void FormUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+                
         }
     }
 }
